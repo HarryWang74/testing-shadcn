@@ -46,7 +46,7 @@ function App() {
     {
       id: 'actions',
       cell: ({ row }) => {
-        const todo = row.original
+        const todo:Todo = row.original
 
         return (
           <DropdownMenu>
@@ -57,7 +57,7 @@ function App() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => console.log('Edit', todo)}>
+              <DropdownMenuItem onClick={() => onEditTodo(todo)}>
                 Edit
               </DropdownMenuItem>
               <DropdownMenuSeparator />
@@ -77,6 +77,16 @@ function App() {
     console.log('Add todo')
     setShowEdit(true)
   }
+
+  const onEditTodo = (todo: Todo) => {
+    console.log('Edit todo', todo)
+    setShowEdit(true)
+  }
+
+  const sheetOnOpenChange = () => {
+    setShowEdit(!showEdit)
+  }
+
   return (
     <>
       <div className="container mx-auto py-10">
@@ -84,7 +94,7 @@ function App() {
         <div className="p-4 text-right">
           <Button onClick={() => onAddTodo()}>Add todo</Button>
         </div>
-        <ToDoEdit open={showEdit} />
+        <ToDoEdit open={showEdit} onOpenChange={sheetOnOpenChange}  />
       </div>
     </>
   )
