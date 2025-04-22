@@ -106,6 +106,7 @@ function App() {
         </div>
         <ToDoEdit 
           open={showEdit}
+          create={isCreating}
           todo={selectedTodo as Todo} 
           onOpenChange={sheetOnOpenChange}  />
       </div>
