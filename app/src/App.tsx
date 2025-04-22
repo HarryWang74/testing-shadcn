@@ -89,7 +89,8 @@ function App() {
   }
 
   const onEditTodo = (todo: Todo) => {
-    console.log('Edit todo', todo)
+    setSelectedTodo(todo)
+    setIsCreating(false)
     setShowEdit(true)
   }
 
