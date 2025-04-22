@@ -71,10 +71,20 @@ function App() {
     },
   ]
 
-  const [showEdit, setShowEdit] = useState(false)
+  const [showEdit, setShowEdit] = useState<boolean>(false)
+  const [isCreating, setIsCreating] = useState<boolean>(false)
+  const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null)
 
   const onAddTodo = () => {
-    console.log('Add todo')
+    let todo: Todo = {
+      id: Math.floor(Math.random() * 1000),
+      title: 'New Todo',
+      status: 'todo',
+      description: 'New Todo Description',
+    }
+    setSelectedTodo(todo)
+    setIsCreating(true)
+    console.log('Creating todo', todo)
     setShowEdit(true)
   }
 
@@ -94,7 +104,10 @@ function App() {
         <div className="p-4 text-right">
           <Button onClick={() => onAddTodo()}>Add todo</Button>
         </div>
-        <ToDoEdit open={showEdit} onOpenChange={sheetOnOpenChange}  />
+        <ToDoEdit 
+          open={showEdit}
+          todo={selectedTodo as Todo} 
+          onOpenChange={sheetOnOpenChange}  />
       </div>
     </>
   )

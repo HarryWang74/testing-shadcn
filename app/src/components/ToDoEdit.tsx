@@ -8,10 +8,12 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet'
+import { Todo } from '@/models/todo'
 
 type ComponentProps = {
-  open: boolean;
-  onOpenChange: () => void;
+  open: boolean
+  todo: Todo
+  onOpenChange: () => void
 }
 
 export function ToDoEdit(prop: ComponentProps) {
@@ -35,4 +37,6 @@ export function ToDoEdit(prop: ComponentProps) {
     </>
   )
 }
+
+
 
