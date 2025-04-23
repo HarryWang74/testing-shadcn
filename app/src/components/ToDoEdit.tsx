@@ -22,7 +22,13 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { useEffect } from 'react'
-
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 
 type ComponentProps = {
@@ -39,6 +45,7 @@ const formSchema = z.object({
   }),
   description: z.string(),
   id: z.number(),
+  status: z.string(),
 })
 
 export function ToDoEdit(prop: ComponentProps) {
@@ -61,6 +68,7 @@ export function ToDoEdit(prop: ComponentProps) {
         form.setValue('title', prop.todo?.title || '')
         form.setValue('description', prop.todo?.description || '')
         form.setValue('id', prop.todo?.id || 0)
+        form.setValue('status', prop.todo?.status || '')
       }else{
         form.reset()
       }
@@ -126,6 +134,32 @@ export function ToDoEdit(prop: ComponentProps) {
                               {...field}
                             />
                           </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="status"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Status</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select status" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="todo">todo</SelectItem>
+                              <SelectItem value="in progress">
+                                in progress
+                              </SelectItem>
+                              <SelectItem value="done">done</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </FormItem>
                       )}
                     />

@@ -15,21 +15,6 @@ import './App.css'
 import { ToDoEdit } from './components/ToDoEdit'
 
 function App() {
-/*   const todos: Todo[] = [
-    {
-      id: 1,
-      title: 'Learn React',
-      status: 'todo',
-      description: 'Learn React with TypeScript and Tailwind CSS',
-    },
-    {
-      id: 2,
-      title: 'Learn Next.js',
-      status: 'todo',
-      description: 'Learn Next.js with TypeScript and Tailwind CSS',
-    },
-  ] */
-
   const columns: ColumnDef<Todo>[] = [
     {
       accessorKey: 'title',
