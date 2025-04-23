@@ -30,6 +30,7 @@ type ComponentProps = {
   create: boolean
   todo?: Todo
   onOpenChange: () => void
+  onSaveTodo: (todo: Todo) => void
 }
 
 const formSchema = z.object({
@@ -48,8 +49,7 @@ export function ToDoEdit(prop: ComponentProps) {
       description: prop.todo?.description || '',
     },
   })
-  const onOpenChangeHandler = (open: boolean) => {
-    console.log('onOpenChangeHandler', open)
+  const onOpenChangeHandler = () => {
     prop.onOpenChange()
   }
 
@@ -67,8 +67,7 @@ export function ToDoEdit(prop: ComponentProps) {
   }, [prop.open])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    prop.onSaveTodo(values as Todo)
     console.log(values)
   }
 
@@ -76,7 +75,7 @@ export function ToDoEdit(prop: ComponentProps) {
     <>
       <Sheet
         open={prop.open}
-        onOpenChange={(open: boolean) => onOpenChangeHandler(open)}
+        onOpenChange={() => onOpenChangeHandler()}
       >
         <SheetContent>
           <SheetHeader>

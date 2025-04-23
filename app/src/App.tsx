@@ -15,7 +15,7 @@ import './App.css'
 import { ToDoEdit } from './components/ToDoEdit'
 
 function App() {
-  const todos: Todo[] = [
+/*   const todos: Todo[] = [
     {
       id: 1,
       title: 'Learn React',
@@ -28,7 +28,7 @@ function App() {
       status: 'todo',
       description: 'Learn Next.js with TypeScript and Tailwind CSS',
     },
-  ]
+  ] */
 
   const columns: ColumnDef<Todo>[] = [
     {
@@ -74,6 +74,20 @@ function App() {
   const [showEdit, setShowEdit] = useState<boolean>(false)
   const [isCreating, setIsCreating] = useState<boolean>(false)
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null)
+  const [todos, setTodos] = useState<Todo[]>([
+    {
+      id: 1,
+      title: 'Learn React',
+      status: 'todo',
+      description: 'Learn React with TypeScript and Tailwind CSS',
+    },
+    {
+      id: 2,
+      title: 'Learn Next.js',
+      status: 'todo',
+      description: 'Learn Next.js with TypeScript and Tailwind CSS',
+    },
+  ])
 
   const onAddTodo = () => {
     let todo: Todo = {
@@ -98,6 +112,13 @@ function App() {
     setShowEdit(!showEdit)
   }
 
+  const onSaveTodo = (todo: Todo) => {
+ 
+    setTodos([...todos, todo])
+    console.log('Saving todo', todo)
+    setShowEdit(false)  
+  }
+
   return (
     <>
       <div className="container mx-auto py-10">
@@ -109,7 +130,9 @@ function App() {
           open={showEdit}
           create={isCreating}
           todo={selectedTodo as Todo} 
-          onOpenChange={sheetOnOpenChange}  />
+          onOpenChange={sheetOnOpenChange}
+          onSaveTodo={onSaveTodo}  
+        />
       </div>
     </>
   )
