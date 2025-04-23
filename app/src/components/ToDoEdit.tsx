@@ -29,7 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-
+import { TodoStatus } from '@/models/todo'
 
 type ComponentProps = {
   open: boolean
@@ -61,6 +61,7 @@ export function ToDoEdit(prop: ComponentProps) {
   const onOpenChangeHandler = () => {
     prop.onOpenChange()
   }
+
 
   useEffect(() => {
     function sheetOpenHandler() {
@@ -153,11 +154,15 @@ export function ToDoEdit(prop: ComponentProps) {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="todo">todo</SelectItem>
-                              <SelectItem value="in progress">
-                                in progress
+                              <SelectItem value={TodoStatus.TODO}>
+                                {TodoStatus.TODO}
                               </SelectItem>
-                              <SelectItem value="done">done</SelectItem>
+                              <SelectItem value={TodoStatus.IN_PROGRESS}>
+                                {TodoStatus.IN_PROGRESS}
+                              </SelectItem>
+                              <SelectItem value={TodoStatus.DONE}>
+                                {TodoStatus.DONE}
+                              </SelectItem>
                             </SelectContent>
                           </Select>
                         </FormItem>
