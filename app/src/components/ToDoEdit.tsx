@@ -144,7 +144,6 @@ export function ToDoEdit(prop: ComponentProps) {
                         <FormItem>
                           <FormLabel>Status</FormLabel>
                           <Select
-                          
                             onValueChange={field.onChange}
                             defaultValue={field.value}
                           >
@@ -154,15 +153,13 @@ export function ToDoEdit(prop: ComponentProps) {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value={TodoStatus.TODO}>
-                                {TodoStatus.TODO}
-                              </SelectItem>
-                              <SelectItem value={TodoStatus.IN_PROGRESS}>
-                                {TodoStatus.IN_PROGRESS}
-                              </SelectItem>
-                              <SelectItem value={TodoStatus.DONE}>
-                                {TodoStatus.DONE}
-                              </SelectItem>
+                              {
+                                Object.values(TodoStatus).map((status) => (
+                                  <SelectItem key={status} value={status}>
+                                    {status}
+                                  </SelectItem>
+                                ))
+                              }
                             </SelectContent>
                           </Select>
                         </FormItem>
