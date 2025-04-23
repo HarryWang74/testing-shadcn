@@ -79,7 +79,6 @@ export function ToDoEdit(prop: ComponentProps) {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     prop.onSaveTodo(prop.create, values as Todo)
-    console.log(values)
   }
 
   return (
@@ -144,11 +143,12 @@ export function ToDoEdit(prop: ComponentProps) {
                         <FormItem>
                           <FormLabel>Status</FormLabel>
                           <Select
+                          
                             onValueChange={field.onChange}
                             defaultValue={field.value}
                           >
                             <FormControl>
-                              <SelectTrigger>
+                              <SelectTrigger className="w-auto">
                                 <SelectValue placeholder="Select status" />
                               </SelectTrigger>
                             </FormControl>
@@ -163,7 +163,9 @@ export function ToDoEdit(prop: ComponentProps) {
                         </FormItem>
                       )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit">
+                      {prop.create ? 'Create' : 'Save'}
+                    </Button>
                   </form>
                 </Form>
               </div>
