@@ -46,7 +46,7 @@ function App() {
                 Edit
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => console.log('del', todo)}>
+              <DropdownMenuItem onClick={() => onDeleteTodo(todo)}>
                 Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -111,8 +111,14 @@ function App() {
       setTodos(updatedTodos)
     }
     
-    
     setShowEdit(false)  
+  }
+
+  const onDeleteTodo = (todo: Todo) => {
+    console.log('Deleting todo', todo)
+
+    const updatedTodos = todos.filter((t) => t.id !== todo.id)
+    setTodos(updatedTodos)
   }
 
   return (
