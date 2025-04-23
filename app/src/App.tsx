@@ -113,9 +113,9 @@ function App() {
   }
 
   const onSaveTodo = (todo: Todo) => {
- 
-    setTodos([...todos, todo])
     console.log('Saving todo', todo)
+    setTodos([...todos, todo])
+    
     setShowEdit(false)  
   }
 

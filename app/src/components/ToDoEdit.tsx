@@ -38,6 +38,7 @@ const formSchema = z.object({
     message: 'Title must be at least 2 characters.',
   }),
   description: z.string(),
+  id: z.number(),
 })
 
 export function ToDoEdit(prop: ComponentProps) {
@@ -45,6 +46,7 @@ export function ToDoEdit(prop: ComponentProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      id: prop.todo?.id || 0,
       title: prop.todo?.title || '', 
       description: prop.todo?.description || '',
     },
@@ -58,6 +60,7 @@ export function ToDoEdit(prop: ComponentProps) {
       if (prop.open) {
         form.setValue('title', prop.todo?.title || '')
         form.setValue('description', prop.todo?.description || '')
+        form.setValue('id', prop.todo?.id || 0)
       }else{
         form.reset()
       }
@@ -73,10 +76,7 @@ export function ToDoEdit(prop: ComponentProps) {
 
   return (
     <>
-      <Sheet
-        open={prop.open}
-        onOpenChange={() => onOpenChangeHandler()}
-      >
+      <Sheet open={prop.open} onOpenChange={() => onOpenChangeHandler()}>
         <SheetContent>
           <SheetHeader>
             <SheetTitle className="mb-4">
@@ -89,6 +89,18 @@ export function ToDoEdit(prop: ComponentProps) {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-8"
                   >
+                    <FormField
+                      control={form.control}
+                      name="id"
+                      render={({ field }) => (
+                        <FormItem className="hidden">
+                          <FormControl>
+                            <Input {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                     <FormField
                       control={form.control}
                       name="title"
@@ -109,7 +121,10 @@ export function ToDoEdit(prop: ComponentProps) {
                         <FormItem>
                           <FormLabel>Description</FormLabel>
                           <FormControl>
-                            <Textarea placeholder="Description here" {...field} />
+                            <Textarea
+                              placeholder="Description here"
+                              {...field}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
