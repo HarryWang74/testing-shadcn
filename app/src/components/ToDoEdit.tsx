@@ -30,7 +30,7 @@ type ComponentProps = {
   create: boolean
   todo?: Todo
   onOpenChange: () => void
-  onSaveTodo: (todo: Todo) => void
+  onSaveTodo: (isCreating:boolean, todo: Todo) => void
 }
 
 const formSchema = z.object({
@@ -70,7 +70,7 @@ export function ToDoEdit(prop: ComponentProps) {
   }, [prop.open])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    prop.onSaveTodo(values as Todo)
+    prop.onSaveTodo(prop.create, values as Todo)
     console.log(values)
   }
 

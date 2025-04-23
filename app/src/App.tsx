@@ -112,9 +112,20 @@ function App() {
     setShowEdit(!showEdit)
   }
 
-  const onSaveTodo = (todo: Todo) => {
+  const onSaveTodo = (isCreating: boolean, todo: Todo) => {
     console.log('Saving todo', todo)
-    setTodos([...todos, todo])
+    if(isCreating){
+      setTodos([...todos, todo])
+    }else{
+      const updatedTodos = todos.map((t) => {
+        if (t.id === todo.id) {
+          return { ...t, ...todo }
+        }
+        return t
+      })
+      setTodos(updatedTodos)
+    }
+    
     
     setShowEdit(false)  
   }
